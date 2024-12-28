@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     display: flex;
     padding: 6px 8px;
     font-size: 17px;
@@ -7,22 +7,26 @@
     font-style: normal;
 }
 
-.navbar #left{
+.inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#left {
     display: flex;
     padding: 8px;
     width: 80%;
-    /* border: 2px solid slateblue; */
 }
 
-.navbar #right{
+#right {
     display: flex;
     padding: 8px;
     width: 20%;
     justify-content: flex-end;
-    /* border: 2px solid seagreen; */
 }
 
-.navbar a{
+.navbar a {
     text-decoration: none;
     color: black;
     margin: 2px 5px;
@@ -30,14 +34,63 @@
     border-bottom: 2px solid transparent;
 }
 
-.navbar a:hover{
+.navbar a:hover {
     border-bottom: 2px solid seagreen;
 }
 
-select{
+select {
     border: none;
     outline: none;
     font-size: 17px;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+}
+
+#naviconul {
+    display: none;
+}
+
+#naviconul #navicon {
+    display: none;
+    text-decoration: none;
+}
+
+@media (max-width: 450px) {
+    .navbar {
+        font-size: 14px;
+        padding: 7px 8px;
+        background-color: salmon;
+    }
+
+    #naviconul {
+        display: block;
+        height: 30px;
+    }
+    
+    #naviconul li #navicon {
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: 25px;
+    }
+
+    .navbar #left,
+    .navbar #right {
+        display: none;
+    }
+
+    .inner{
+        flex-direction: column;
+        max-height: 400px;
+        margin-top: 40px;
+    }
+
+    .navbar .open #left,
+    .navbar .open #right {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 700;
+    }
 }

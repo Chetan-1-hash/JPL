@@ -1,6 +1,6 @@
 .container {
     width: auto;
-    height: 40em;
+    height: 91vh;
     padding: 3px;
     display: flex;
     flex-direction: column;
@@ -47,3 +47,15 @@
     margin: 8px;
     cursor: pointer;
 }
+
+@media (max-width:450px) and (min-height:809px){
+    .container{
+        padding: 0;
+        height: 93.25vh;
+    }
+    .container .innercontainer .title{
+        font-size: 60px;
+    }
+
+}
+

@@ -1,12 +1,17 @@
 <div class="navbar">
-    <nav id="left">
-        <a routerLink="/home">Home</a>
-        <a routerLink="/team">Teams Generation</a>
-        <a routerLink="/gallery">Gallery</a>
-    </nav>
-
-    <nav id="right">
-        <a routerLink="#">Login</a>
-        <a routerLink="#">Register</a>
-    </nav>
+    <ul id="naviconul">
+        <li><fa-icon id="navicon" (click)="openNav()" [icon]="faNav"></fa-icon></li>
+    </ul>
+    <div class="inner" #navrouter [ngClass]="{'open': isOpened}">
+        <nav id="left">
+            <a routerLink="/home">Home</a>
+            <a routerLink="/team">Teams Generation</a>
+            <a routerLink="/gallery">Gallery</a>
+        </nav>
+    
+        <nav id="right">
+            <a routerLink="#">Login</a>
+            <a routerLink="#">Register</a>
+        </nav>
+    </div>
 </div>
