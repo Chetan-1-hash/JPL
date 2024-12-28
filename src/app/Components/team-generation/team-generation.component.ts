@@ -54,6 +54,7 @@ export class TeamGenerationComponent {
   generateTeams(): void {
     if (!this.workbook) {
       console.error('No workbook loaded!');
+      alert('No workbook loaded!');
       return;
     }
 
@@ -103,6 +104,7 @@ export class TeamGenerationComponent {
     const container = document.querySelector('.outputsection') as HTMLElement | null;
     if (!container) {
       console.error('No output section to export!');
+      alert('No output section to export!');
       return;
     }
   

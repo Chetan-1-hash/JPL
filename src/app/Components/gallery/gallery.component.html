@@ -8,5 +8,8 @@
     </div>
     <div class="imagecontainer">
         <p>{{year}}</p>
+        <div class="images">
+            <img *ngFor="let i of imgLists; let ind=index" [src]="i" [alt]="'img-'+ind"/>
+        </div>
     </div>
 </div>

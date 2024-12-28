@@ -39,17 +39,33 @@
     font-family: "Fjalla One", sans-serif;
     font-size: 32px;
 }
-
+.imagecontainer .images{
+    font-size: 12px;
+    border: 2px solid;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.imagecontainer .images img{
+    width: 350px;
+    height: 250px;
+    padding: 8px;
+}
 @media (max-width:450px){
     .container{
         padding: 15px;
-        height: 93.25vh;
+        height: auto;
+    }
+
+    .imagecontainer .images{
+        height: auto;
     }
 
 }
 @media(min-height:809px){
     .container{
-        height: 93.25vh;
+        height: auto;
         background-color: salmon;
     }
 
@@ -63,6 +79,10 @@
     .container .btns .tag{
         padding-right: 0px;
         font-size: 20px;
+    }
+
+    .imagecontainer .images img{
+        width: 100%;
     }
 
 }
