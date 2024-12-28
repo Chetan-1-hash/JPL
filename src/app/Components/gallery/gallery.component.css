@@ -1,22 +1,25 @@
 .container {
-    width: auto;
+    width: 100vw;
     height: 91vh;
     padding: 3px;
     display: flex;
     flex-direction: column;
     /* border: 2px solid rebeccapurple; */
 }
-.container .btns{
+
+.container .btns {
     display: flex;
     gap: 22px;
     font-family: "Fjalla One", sans-serif;
 }
-.container .btns .tag{
+
+.container .btns .tag {
     border: none;
     outline: none;
     padding: 8px;
 }
-.container .btns button{
+
+.container .btns button {
     border: none;
     outline: none;
     padding: 8px;
@@ -26,11 +29,11 @@
     cursor: pointer;
 }
 
-.container .btns button:hover{
+.container .btns button:hover {
     background-color: rgb(244, 175, 167);
 }
 
-.imagecontainer{
+.imagecontainer {
     height: 100%;
     margin: 12px;
     display: flex;
@@ -39,7 +42,8 @@
     font-family: "Fjalla One", sans-serif;
     font-size: 32px;
 }
-.imagecontainer .images{
+
+.imagecontainer .images {
     font-size: 12px;
     border: 2px solid;
     width: 100%;
@@ -47,42 +51,78 @@
     display: flex;
     flex-wrap: wrap;
 }
-.imagecontainer .images img{
+
+.imagecontainer .images img {
     width: 350px;
     height: 250px;
     padding: 8px;
 }
-@media (max-width:450px){
-    .container{
-        padding: 15px;
+
+@media (max-width:450px) {
+    .container {
+        padding: 12px 5px;
         height: auto;
     }
 
-    .imagecontainer .images{
+    .imagecontainer .images {
         height: auto;
     }
 
-}
-@media(min-height:809px){
-    .container{
-        height: auto;
-        background-color: salmon;
-    }
-
-    .container .btns button, .container .btns .tag{
+    .container .btns button,
+    .container .btns .tag {
         font-size: 16px;
     }
-    .container .btns button{
+
+    .container .btns button {
         border: 2px solid #ccc;
     }
 
-    .container .btns .tag{
+    .container .btns .tag {
         padding-right: 0px;
         font-size: 20px;
     }
 
-    .imagecontainer .images img{
+    .imagecontainer .images img {
         width: 100%;
+    }
+
+}
+
+@media(min-height:809px) {
+    .container {
+        height: auto;
+        background-color: salmon;
+    }
+
+    .container .btns button,
+    .container .btns .tag {
+        font-size: 16px;
+    }
+
+    .container .btns button {
+        border: 2px solid #ccc;
+    }
+
+    .container .btns .tag {
+        padding-right: 0px;
+        font-size: 20px;
+    }
+
+    .imagecontainer .images img {
+        width: 100%;
+    }
+
+}
+@media (max-width:350px) {
+    .container {
+        padding: 15px;
+        height: auto;
+        width: 110vw;
+        border: 2px solid;
+    }
+
+    .imagecontainer .images {
+        height: auto;
     }
 
 }
