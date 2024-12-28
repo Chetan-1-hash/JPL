@@ -100,26 +100,38 @@ export class TeamGenerationComponent {
   }
 
   exportPdf(): void {
-    const container = document.querySelector('.outputsection') as HTMLElement | null; // Explicitly cast as HTMLElement or null
+    const container = document.querySelector('.outputsection') as HTMLElement | null;
     if (!container) {
       console.error('No output section to export!');
       return;
     }
   
-    // Use html2canvas to render the container into an image
-    html2canvas(container, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png'); // Convert canvas to an image
-      const pdf = new jsPDF('p', 'mm', 'a4'); // Create a new jsPDF instance
+    // Ensure all categories are visible
+    container.classList.add('desktop-layout'); // Apply a desktop-like layout for styling consistency
   
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
+    html2canvas(container, {
+      scale: 2, // Higher resolution
+      scrollX: -window.scrollX, // Handle scrolling offsets
+      scrollY: -window.scrollY,
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('portrait', 'px', [1600, 2200]); // Set layout size to match desktop
   
-      // Calculate dimensions to fit content in the PDF page
-      const imgWidth = pageWidth;
+      const imgWidth = 1536;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
   
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight); // Add image to PDF
-      pdf.save('Generated_Teams.pdf'); // Save the PDF
+      let currentHeight = 0;
+      pdf.addImage(imgData, 'PNG', 0, -currentHeight, imgWidth, imgHeight);
+      // Handle multi-page export
+      // while (currentHeight < imgHeight) {
+      //   pdf.addImage(imgData, 'PNG', 0, -currentHeight, imgWidth, imgHeight); // Add image section to PDF
+      //   if (currentHeight + 864 < imgHeight) pdf.addPage(); // Add new page if needed
+      //   currentHeight += 864;
+      // }
+  
+      pdf.save('Generated_Teams.pdf'); // Save the file
+  
+      container.classList.remove('desktop-layout'); // Clean up layout modifications
     });
   }
 }

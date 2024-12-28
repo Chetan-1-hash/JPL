@@ -27,7 +27,7 @@
     <div class="outputsection"
       *ngIf="generatedMenTeams?.length || generatedBoysTeams?.length || generatedGirlsTeams?.length">
       <p class="tags">Men</p>
-      <div class="Tables" *ngIf="generatedMenTeams?.length">
+      <div class="Tables" *ngIf="generatedMenTeams?.length" id="menTeams">
         <table *ngFor="let team of generatedMenTeams; let teamIndex = index">
           <tr>
             <th>{{ MensTeamNames[teamIndex] }}</th>
@@ -49,7 +49,7 @@
         </table>
       </div> -->
       <p class="tags">Boys</p>
-      <div class="Tables" *ngIf="generatedBoysTeams?.length">
+      <div class="Tables" *ngIf="generatedBoysTeams?.length" id="boysTeams">
         <table *ngFor="let team of generatedBoysTeams; let teamIndex = index">
           <tr>
             <th>{{ BoysTeamNames[teamIndex] }}</th>
@@ -60,7 +60,7 @@
         </table>
       </div>
       <p class="tags">Girls</p>
-      <div class="Tables" *ngIf="generatedGirlsTeams?.length">
+      <div class="Tables" *ngIf="generatedGirlsTeams?.length" id="girlsTeams">
         <table *ngFor="let team of generatedGirlsTeams; let teamIndex = index">
           <tr>
             <th>{{ GirlsTeamNames[teamIndex] }}</th>
