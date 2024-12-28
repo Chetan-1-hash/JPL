@@ -1,0 +1,41 @@
+.container {
+    width: auto;
+    height: 40em;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid rebeccapurple; */
+}
+.container .btns{
+    display: flex;
+    gap: 22px;
+    font-family: "Fjalla One", sans-serif;
+}
+.container .btns .tag{
+    border: none;
+    outline: none;
+    padding: 8px;
+}
+.container .btns button{
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: salmon;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container .btns button:hover{
+    background-color: rgb(244, 175, 167);
+}
+
+.imagecontainer{
+    height: 100%;
+    margin: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Fjalla One", sans-serif;
+    font-size: 32px;
+}

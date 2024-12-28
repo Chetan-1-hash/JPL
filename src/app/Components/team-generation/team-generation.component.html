@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="title">
+    <h1>Create the Team</h1>
+  </div>
+  <div class="innercontainer">
+    <div class="uploadsection">
+      <label for="fileUpload">Upload file:</label>
+      <input type="file" name="uploadFile" id="uploadFile" (change)="onFileUpload($event)">
+      <h3 class="line-1">Categories: Men, Women, Boys, and Girls.</h3>
+      <div class="team-size-inputs">
+        <label for="teamSizeMen">Team size (Men):</label>
+        <input type="number" id="teamSizeMen" min="1" [(ngModel)]="teamMenSize">
+
+        <!-- <label for="teamSizeWomen">Team size (Women):</label>
+        <input type="number" id="teamSizeWomen" min="1" [(ngModel)]="teamWomenSize"> -->
+
+        <label for="teamSizeGirls">Team size (Girls):</label>
+        <input type="number" id="teamSizeGirls" min="1" [(ngModel)]="teamGirlsSize">
+
+        <label for="teamSizeBoys">Team size (Boys):</label>
+        <input type="number" id="teamSizeBoys" min="1" [(ngModel)]="teamBoysSize">
+      </div>
+      <button id="generateTeams" class="button" (click)="generateTeams()">Generate Teams</button>
+      <button id="exportPdf" class="button" (click)="exportPdf()">Export to PDF</button>
+    </div>
+
+    <div class="outputsection"
+      *ngIf="generatedMenTeams?.length || generatedBoysTeams?.length || generatedGirlsTeams?.length">
+      <p class="tags">Men</p>
+      <div class="Tables" *ngIf="generatedMenTeams?.length">
+        <table *ngFor="let team of generatedMenTeams; let teamIndex = index">
+          <tr>
+            <th>{{ MensTeamNames[teamIndex] }}</th>
+          </tr>
+          <tr *ngFor="let player of team">
+            <td>{{ player }}</td>
+          </tr>
+        </table>
+      </div>
+      <!-- <p class="tags">Women</p>
+      <div class="Tables" *ngIf="generatedWomenTeams?.length">
+        <table *ngFor="let team of generatedWomenTeams; let teamIndex = index">
+          <tr>
+            <th>{{ WomensTeamNames[teamIndex] }}</th>
+          </tr>
+          <tr *ngFor="let player of team">
+            <td>{{ player }}</td>
+          </tr>
+        </table>
+      </div> -->
+      <p class="tags">Boys</p>
+      <div class="Tables" *ngIf="generatedBoysTeams?.length">
+        <table *ngFor="let team of generatedBoysTeams; let teamIndex = index">
+          <tr>
+            <th>{{ BoysTeamNames[teamIndex] }}</th>
+          </tr>
+          <tr *ngFor="let player of team">
+            <td>{{ player }}</td>
+          </tr>
+        </table>
+      </div>
+      <p class="tags">Girls</p>
+      <div class="Tables" *ngIf="generatedGirlsTeams?.length">
+        <table *ngFor="let team of generatedGirlsTeams; let teamIndex = index">
+          <tr>
+            <th>{{ GirlsTeamNames[teamIndex] }}</th>
+          </tr>
+          <tr *ngFor="let player of team">
+            <td>{{ player }}</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

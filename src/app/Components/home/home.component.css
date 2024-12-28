@@ -1,0 +1,49 @@
+.container {
+    width: auto;
+    height: 40em;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid rebeccapurple; */
+}
+
+.container .innercontainer {
+    /* border: 2px solid black; */
+    background-color: salmon;
+    padding: 0px 10px 20px 10px;
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fjalla One", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.container .innercontainer .title {
+    font-size: 82px;
+    font-family: "Rubik Vinyl", serif;
+    font-weight: 700;
+    text-align: center;
+}
+
+.container .innercontainer .line-1 {
+    font-size: 32px;
+    width: auto;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 40px;
+}
+
+.container .innercontainer #login-btn {
+    background-color: whitesmoke;
+    border-radius: 50%;
+    font-size: 28px;
+    border: none;
+    padding: 5px 10px;
+    margin: 8px;
+    cursor: pointer;
+}

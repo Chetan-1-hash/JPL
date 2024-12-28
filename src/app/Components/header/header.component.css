@@ -1,0 +1,43 @@
+.navbar{
+    display: flex;
+    padding: 6px 8px;
+    font-size: 17px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.navbar #left{
+    display: flex;
+    padding: 8px;
+    width: 80%;
+    /* border: 2px solid slateblue; */
+}
+
+.navbar #right{
+    display: flex;
+    padding: 8px;
+    width: 20%;
+    justify-content: flex-end;
+    /* border: 2px solid seagreen; */
+}
+
+.navbar a{
+    text-decoration: none;
+    color: black;
+    margin: 2px 5px;
+    padding: 3px;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar a:hover{
+    border-bottom: 2px solid seagreen;
+}
+
+select{
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+}

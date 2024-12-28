@@ -1,0 +1,10 @@
+::ng-deep {
+    /* Hide both scrollbars but still allow scrolling */
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+/* Webkit browsers */
+::ng-deep::-webkit-scrollbar {
+    display: none;
+}

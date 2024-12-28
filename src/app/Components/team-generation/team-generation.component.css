@@ -1,0 +1,122 @@
+.container {
+  width: auto;
+  height: 45rem;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Fjalla One';
+}
+
+.container .innercontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.container .innercontainer .uploadsection {
+  padding: 12px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0px 0px 4px;
+  min-width: 28%;
+}
+
+.title {
+  font-family: 'Roboto';
+  margin: 15px;
+}
+
+.line-1 {
+  margin-top: 10px;
+}
+
+.team-size-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 2px solid salmon;
+}
+
+label, .tags {
+  font-size: 18px;
+  color: #333;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: salmon;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: rgb(240, 175, 168);
+}
+.outputsection {
+  width: 100%;
+  margin: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.outputsection .Tables{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  width: 90%;
+  /* border-bottom: 2px solid seagreen; */
+  padding: 16px;
+  box-shadow: 0px 0px 4px;
+}
+
+/* New CSS for the tables */
+table {
+  width: 20%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: center;
+}
+
+th {
+  background-color: salmon;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+td:hover {
+  background-color: #f1f1f1;
+}
+
+.tags {
+  font-size: 24px;
+  margin: 15px;
+  text-align: center;
+  font-weight: bold;
+}
