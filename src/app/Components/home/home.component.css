@@ -48,7 +48,7 @@
     cursor: pointer;
 }
 
-@media (max-width:450px) and (min-height:809px){
+@media (max-width:450px){
     .container{
         padding: 0;
         height: 93.25vh;
@@ -58,4 +58,23 @@
     }
 
 }
+@media(min-height:809px){
+    .container{
+        padding: 0;
+        height: 93.25vh;
+    }
+
+}
+
+@media (max-width:300px){
+    .container .innercontainer .title{
+        font-size: 50px;
+    }
+
+    .container .innercontainer .line-1{
+        font-size: 24px;
+    }
+
+}
+
 
