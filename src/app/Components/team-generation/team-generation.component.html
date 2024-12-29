@@ -4,30 +4,51 @@
   </div>
   <div class="innercontainer">
     <div class="uploadsection">
+
       <label for="fileUpload">Upload file:</label>
       <input type="file" name="uploadFile" id="uploadFile" (change)="onFileUpload($event)">
       <h3 class="line-1">Categories: Men, Women, Boys, and Girls.</h3>
-      <div class="team-size-inputs">
-        <label for="teamSizeMen">Team size (Men):</label>
-        <input type="number" id="teamSizeMen" min="1" [(ngModel)]="teamMenSize">
 
-        <!-- <label for="teamSizeWomen">Team size (Women):</label>
-        <input type="number" id="teamSizeWomen" min="1" [(ngModel)]="teamWomenSize"> -->
-
-        <label for="teamSizeGirls">Team size (Girls):</label>
-        <input type="number" id="teamSizeGirls" min="1" [(ngModel)]="teamGirlsSize">
-
-        <label for="teamSizeBoys">Team size (Boys):</label>
-        <input type="number" id="teamSizeBoys" min="1" [(ngModel)]="teamBoysSize">
+      <div class="category-checkboxes">
+        <label>
+          <input type="checkbox" [(ngModel)]="isMenSelected"> Men
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="isWomenSelected"> Women
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="isBoysSelected"> Boys
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="isGirlsSelected"> Girls
+        </label>
       </div>
+
+      <!-- Team Size Inputs -->
+      <div class="team-size-inputs">
+        <label for="teamSizeMen" *ngIf="isMenSelected">Team size (Men):</label>
+        <input *ngIf="isMenSelected" type="number" id="teamSizeMen" min="1" [(ngModel)]="teamMenSize">
+
+        <label for="teamSizeWomen" *ngIf="isWomenSelected">Team size (Women):</label>
+        <input *ngIf="isWomenSelected" type="number" id="teamSizeWomen" min="1" [(ngModel)]="teamWomenSize">
+
+        <label for="teamSizeGirls" *ngIf="isGirlsSelected">Team size (Girls):</label>
+        <input *ngIf="isGirlsSelected" type="number" id="teamSizeGirls" min="1" [(ngModel)]="teamGirlsSize">
+
+        <label for="teamSizeBoys" *ngIf="isBoysSelected">Team size (Boys):</label>
+        <input *ngIf="isBoysSelected" type="number" id="teamSizeBoys" min="1" [(ngModel)]="teamBoysSize">
+      </div>
+
       <button id="generateTeams" class="button" (click)="generateTeams()">Generate Teams</button>
       <button id="exportPdf" class="button" (click)="exportPdf()">Export to PDF</button>
+
     </div>
 
     <div class="outputsection"
       *ngIf="generatedMenTeams?.length || generatedBoysTeams?.length || generatedGirlsTeams?.length">
-      <p class="tags">Men</p>
-      <div class="Tables" *ngIf="generatedMenTeams?.length" id="menTeams">
+
+      <p class="tags" *ngIf="isMenSelected">Men</p>
+      <div class="Tables" *ngIf="generatedMenTeams?.length && isMenSelected" id="menTeams">
         <table *ngFor="let team of generatedMenTeams; let teamIndex = index">
           <tr>
             <th>{{ MensTeamNames[teamIndex] }}</th>
@@ -37,8 +58,9 @@
           </tr>
         </table>
       </div>
-      <!-- <p class="tags">Women</p>
-      <div class="Tables" *ngIf="generatedWomenTeams?.length">
+
+      <p class="tags" *ngIf="isWomenSelected">Women</p>
+      <div class="Tables" *ngIf="generatedWomenTeams?.length && isWomenSelected">
         <table *ngFor="let team of generatedWomenTeams; let teamIndex = index">
           <tr>
             <th>{{ WomensTeamNames[teamIndex] }}</th>
@@ -47,9 +69,10 @@
             <td>{{ player }}</td>
           </tr>
         </table>
-      </div> -->
-      <p class="tags">Boys</p>
-      <div class="Tables" *ngIf="generatedBoysTeams?.length" id="boysTeams">
+      </div>
+
+      <p class="tags" *ngIf="isBoysSelected">Boys</p>
+      <div class="Tables" *ngIf="generatedBoysTeams?.length && isBoysSelected" id="boysTeams">
         <table *ngFor="let team of generatedBoysTeams; let teamIndex = index">
           <tr>
             <th>{{ BoysTeamNames[teamIndex] }}</th>
@@ -59,8 +82,9 @@
           </tr>
         </table>
       </div>
-      <p class="tags">Girls</p>
-      <div class="Tables" *ngIf="generatedGirlsTeams?.length" id="girlsTeams">
+
+      <p class="tags" *ngIf="isGirlsSelected">Girls</p>
+      <div class="Tables" *ngIf="generatedGirlsTeams?.length && isGirlsSelected" id="girlsTeams">
         <table *ngFor="let team of generatedGirlsTeams; let teamIndex = index">
           <tr>
             <th>{{ GirlsTeamNames[teamIndex] }}</th>

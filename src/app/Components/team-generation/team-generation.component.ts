@@ -13,18 +13,24 @@ import html2canvas from 'html2canvas';
 })
 export class TeamGenerationComponent {
 
+
+  isMenSelected: boolean = false; 
+  isWomenSelected: boolean = false; 
+  isBoysSelected: boolean = false;
+  isGirlsSelected: boolean = false;
+
   MensTeamNames: string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Thor', 'Loki', 'Black Panther'];
-  // WomensTeamNames: string[] = ['Wonder Woman', 'Harmanpreet', 'Mithali Raj'];
+  WomensTeamNames: string[] = ['Wonder Woman', 'Harmanpreet', 'Mithali Raj'];
   BoysTeamNames: string[] = ['Doremon', 'Shinchan', 'Tom & Jerry', 'Oggy', 'Ninja Hatori', 'SpongeBob SquarePants', 'Pokemon', 'Motu Patlu'];
   GirlsTeamNames: string[] = ['Cinderella', 'Snow White', 'Tom & Jerry', 'Moana','Minnie Mouse'];
 
   teamMenSize: number = 7;
-  // teamWomenSize: number = 7;
+  teamWomenSize: number = 7;
   teamBoysSize: number = 7;
   teamGirlsSize: number = 7;
 
   generatedMenTeams: string[][] = [];
-  // generatedWomenTeams: string[][] = [];
+  generatedWomenTeams: string[][] = [];
   generatedBoysTeams: string[][] = [];
   generatedGirlsTeams: string[][] = [];
 
@@ -38,7 +44,6 @@ export class TeamGenerationComponent {
       const data = e.target.result;
       const workbook = XLSX.read(data, { type: 'binary' });
       this.workbook = workbook;
-      // this.generateTeams(); // Generate teams after the workbook is loaded
     };
 
     reader.readAsBinaryString(file);
@@ -46,8 +51,8 @@ export class TeamGenerationComponent {
 
   shuffleArray(arr: string[]): void {
     for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)); // Generate a random index
-      [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap the elements
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
 
@@ -59,17 +64,17 @@ export class TeamGenerationComponent {
     }
 
     const menPlayers = this.extractNamesFromSheet(this.workbook, 'MEN');
-    // const womenPlayers = this.extractNamesFromSheet(this.workbook, 'WOMEN');
+    const womenPlayers = this.extractNamesFromSheet(this.workbook, 'WOMEN');
     const boysPlayers = this.extractNamesFromSheet(this.workbook, 'Boys');
     const girlsPlayers = this.extractNamesFromSheet(this.workbook, 'Girls');
 
     this.shuffleArray(menPlayers);
-    // this.shuffleArray(womenPlayers);
+    this.shuffleArray(womenPlayers);
     this.shuffleArray(boysPlayers);
     this.shuffleArray(girlsPlayers);
 
     this.generatedMenTeams = this.splitIntoTeams(menPlayers, this.teamMenSize);
-    // this.generatedWomenTeams = this.splitIntoTeams(womenPlayers, this.teamWomenSize);
+    this.generatedWomenTeams = this.splitIntoTeams(womenPlayers, this.teamWomenSize);
     this.generatedBoysTeams = this.splitIntoTeams(boysPlayers, this.teamBoysSize);
     this.generatedGirlsTeams = this.splitIntoTeams(girlsPlayers, this.teamGirlsSize);
   }
@@ -82,7 +87,7 @@ export class TeamGenerationComponent {
     }
     const data: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
     const fullNames: string[] = [];
-    const fullNameIndex = data[0].indexOf('FullName'); // Find the 'FullName' column index
+    const fullNameIndex = data[0].indexOf('FullName');
 
     for (let i = 1; i < data.length; i++) {
       if (data[i][fullNameIndex]) {
