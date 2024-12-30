@@ -34,7 +34,7 @@
 }
 
 .imagecontainer {
-    height: 100%;
+    height: auto;
     margin: 12px;
     display: flex;
     flex-direction: column;
@@ -45,11 +45,12 @@
 
 .imagecontainer .images {
     font-size: 12px;
+    /* width: 100%; */
     border: 2px solid;
-    width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .imagecontainer .images img {
@@ -89,7 +90,7 @@
 
 }
 
-@media(max-height:809px) {
+@media(min-height:809px) {
     .container {
         height: auto;
     }
