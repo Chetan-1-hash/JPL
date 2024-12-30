@@ -19,10 +19,10 @@ export class TeamGenerationComponent {
   isBoysSelected: boolean = false;
   isGirlsSelected: boolean = false;
 
-  MensTeamNames: string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Thor', 'Loki', 'Black Panther'];
-  WomensTeamNames: string[] = ['Wonder Woman', 'Harmanpreet', 'Mithali Raj'];
-  BoysTeamNames: string[] = ['Doremon', 'Shinchan', 'Tom & Jerry', 'Oggy', 'Ninja Hatori', 'SpongeBob SquarePants', 'Pokemon', 'Motu Patlu'];
-  GirlsTeamNames: string[] = ['Cinderella', 'Snow White', 'Tom & Jerry', 'Moana','Minnie Mouse'];
+  MensTeamNames: string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Thor', 'Loki', 'Black Panther','Hawkeye', 'Vision'];
+  WomensTeamNames: string[] = ['Wonder Woman', 'Captian Marvel', 'Mantis','Moondragon'];
+  BoysTeamNames: string[] = ['Doremon', 'Shinchan', 'Tom', 'Jerry', 'Oggy', 'Ninja Hatori', 'SpongeBob SquarePants', 'Pokemon', 'Motu Patlu'];
+  GirlsTeamNames: string[] = ['Cinderella', 'Snow White', 'Tom', 'Jerry', 'Moana','Minnie Mouse'];
 
   teamMenSize: number = 7;
   teamWomenSize: number = 7;

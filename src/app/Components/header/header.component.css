@@ -64,6 +64,14 @@ select {
     font-size: 17px;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+    background-color: inherit;
+    width: 100px;
+    height: auto;
+}
+option{
+    text-align: center;
+    border: none;
+    outline: none;
 }
 
 #naviconul {
@@ -122,5 +130,9 @@ select {
     .navbar a::after, .navbar a:hover {
         background-color: transparent;
         border-bottom: 2px solid seagreen;
+    }
+
+    option{
+        background-color: salmon;
     }
 }

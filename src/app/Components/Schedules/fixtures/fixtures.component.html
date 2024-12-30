@@ -1,0 +1,39 @@
+<div class="container">
+    <h1 class="title">Match Fixtures</h1>
+
+    <div class="btns">
+        <p class="tag">Categories</p>
+        <button value="Men" (click)="CategoryChange($event)">Men</button>
+        <button value="Women" (click)="CategoryChange($event)">Women</button>
+        <button value="Boys" (click)="CategoryChange($event)">Boys</button>
+        <button value="Girls" (click)="CategoryChange($event)">Girls</button>
+    </div>
+  
+    <!-- Table for Group Numbers -->
+    <h3 class="tag" *ngIf="category!=='Men'">No Groups</h3>
+    <div id="groupTable" *ngIf="category==='Men'">
+      <table class="matchTable" *ngFor="let group of Groups; let index = index">
+        <tr>
+          <th>Group - {{ index + 1 }}</th>
+        </tr>
+        <tr *ngFor="let team of group">
+          <td>{{ team }}</td>
+        </tr>
+      </table>
+    </div>
+  
+    <!-- Table for Group Wise Fixtures -->
+    <div id="groupWiseTable">
+      <table class="matchTable">
+        <tr>
+            <th>Time</th>
+            <th>Fixtures</th>
+        </tr>
+        <tr *ngFor="let fixture of fixtures">
+            <td>{{ fixture.time }}</td>
+            <td>{{ fixture.team1 }} <b>Vs</b> {{ fixture.team2 }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  

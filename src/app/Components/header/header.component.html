@@ -5,13 +5,18 @@
     <div class="inner" #navrouter [ngClass]="{'open': isOpened}">
         <nav id="left">
             <a routerLink="/home">Home</a>
-            <a routerLink="/team">Teams Generation</a>
+            <!-- <a routerLink="/team">Teams Generation</a> -->
+            <select name="schedule" id="schedule" (change)="onSelection($event)" [ngStyle]="{ 'width': selectedOption === 'team' ? '170px' : '100px' }">
+                <option value="">Schedule</option>
+                <option value="team">Teams Generation</option>
+                <option value="fixtures">Fixtures</option>
+            </select>
             <a routerLink="/gallery">Gallery</a>
         </nav>
-    
-        <nav id="right">
+
+        <!-- <nav id="right">
             <a routerLink="#">Login</a>
             <a routerLink="#">Register</a>
-        </nav>
+        </nav> -->
     </div>
 </div>

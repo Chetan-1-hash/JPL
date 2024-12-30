@@ -129,9 +129,9 @@ td:hover {
 }
 
 @media (max-width: 450px) {
-  .container{
+  /* .container{
     background-color: salmon;
-  }
+  } */
   .container .innercontainer .uploadsection{
     width: 90%;
   }

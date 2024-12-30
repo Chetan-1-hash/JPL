@@ -1,0 +1,74 @@
+.container {
+    width: 100vw;
+    height: 91vh;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .btns {
+    display: flex;
+    gap: 22px;
+    font-family: "Fjalla One", sans-serif;
+    flex-wrap: wrap;
+}
+
+.tag {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-family: "Fjalla One", sans-serif;
+    flex-wrap: wrap;
+}
+
+.container .btns button {
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: salmon;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container .btns button:hover {
+    background-color: rgb(244, 175, 167);
+}
+.title{
+    font-family: 'Fjalla One';
+    font-size: 60px;
+}
+#groupTable{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#groupWiseTable{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.matchTable{
+    border-collapse: collapse;
+    width: 35%;
+    margin: 8px;
+    text-align: center;
+}
+th,td{
+    border: 2px solid black;
+    padding: 8px;
+}
+th{
+    background-color: salmon;
+}
+
+@media (max-width:450px){
+    #groupTable, #groupWiseTable{
+        width: 100%;
+    }
+}
