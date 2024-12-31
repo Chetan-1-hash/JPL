@@ -72,26 +72,61 @@ export class TeamGenerationComponent {
     const boysPlayers = this.extractNamesFromSheet(this.workbook, 'Boys');
     const girlsPlayers = this.extractNamesFromSheet(this.workbook, 'Girls');
   
-    // Shuffle players
+    // Shuffle players for non-MEN categories
     this.shuffleArray(womenPlayers);
     this.shuffleArray(boysPlayers);
     this.shuffleArray(girlsPlayers);
   
     // Divide MEN players by prioritizing MVPMenList
-    const menPlayersWithoutMVP = menPlayers.filter(player => !MVPMenList.includes(player));
     const prioritizedMenPlayers = menPlayers.filter(player => MVPMenList.includes(player));
+    const menPlayersWithoutMVP = menPlayers.filter(player => !MVPMenList.includes(player));
+
+    console.log(prioritizedMenPlayers);
   
     // Shuffle remaining MEN players
     this.shuffleArray(menPlayersWithoutMVP);
   
-    // Combine the MVP players with the shuffled remaining players
-    const finalMenPlayers = [...prioritizedMenPlayers, ...menPlayersWithoutMVP];
+    // Divide MVP players equally across teams
+    const totalTeams = Math.ceil(menPlayers.length / this.teamMenSize);
+    const mvpTeams = this.initializeEmptyTeams(totalTeams);
+    this.distributeMVPPlayers(mvpTeams, prioritizedMenPlayers);
   
-    // Generate teams
-    this.generatedMenTeams = this.splitIntoTeams(finalMenPlayers, this.teamMenSize);
+    // Fill the remaining slots in each team with non-MVP players
+    const finalMenTeams = this.fillTeams(mvpTeams, menPlayersWithoutMVP, this.teamMenSize);
+  
+    // Generate teams for other categories
+    this.generatedMenTeams = finalMenTeams;
     this.generatedWomenTeams = this.splitIntoTeams(womenPlayers, this.teamWomenSize);
     this.generatedBoysTeams = this.splitIntoTeams(boysPlayers, this.teamBoysSize);
     this.generatedGirlsTeams = this.splitIntoTeams(girlsPlayers, this.teamGirlsSize);
+  }
+
+  initializeEmptyTeams(totalTeams: number): string[][] {
+    const teams: string[][] = [];
+    for (let i = 0; i < totalTeams; i++) {
+      teams.push([]);
+    }
+    return teams;
+  }
+
+  distributeMVPPlayers(teams: string[][], mvpPlayers: string[]): void {
+    let teamIndex = 0;
+    mvpPlayers.forEach(player => {
+      teams[teamIndex].push(player);
+      teamIndex = (teamIndex + 1) % teams.length; // Move to the next team cyclically
+    });
+  }
+
+  fillTeams(teams: string[][], remainingPlayers: string[], teamSize: number): string[][] {
+    for (const player of remainingPlayers) {
+      for (const team of teams) {
+        if (team.length < teamSize) {
+          team.push(player);
+          break; // Move to the next player after filling a slot
+        }
+      }
+    }
+    return teams;
   }
   
 
@@ -101,17 +136,25 @@ export class TeamGenerationComponent {
       console.error(`Sheet ${sheetName} not found!`);
       return [];
     }
+  
     const data: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
     const fullNames: string[] = [];
     const fullNameIndex = data[0].indexOf('FullName');
-
+  
     for (let i = 1; i < data.length; i++) {
       if (data[i][fullNameIndex]) {
-        fullNames.push(data[i][fullNameIndex]);
+        const rawName = data[i][fullNameIndex];
+        const nameParts = rawName.split(' ').filter(Boolean); // Split and remove extra spaces
+        const cleanedName = nameParts.length > 1 
+          ? `${nameParts[0]} ${nameParts[nameParts.length - 1]}` // Keep first and last names
+          : rawName; // If only one part, keep it as is
+        fullNames.push(cleanedName);
       }
     }
+  
     return fullNames;
   }
+  
 
   splitIntoTeams(players: string[], teamSize: number): string[][] {
     const teams: string[][] = [];
