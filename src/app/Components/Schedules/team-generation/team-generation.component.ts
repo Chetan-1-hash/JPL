@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';  // Import the xlsx library
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MVPMenList } from './MVPList'
 
 @Component({
   selector: 'app-team-generation',
@@ -64,22 +65,35 @@ export class TeamGenerationComponent {
       alert('No workbook loaded!');
       return;
     }
-
+  
+    // Extract player names from the respective sheets
     const menPlayers = this.extractNamesFromSheet(this.workbook, 'MEN');
     const womenPlayers = this.extractNamesFromSheet(this.workbook, 'WOMEN');
     const boysPlayers = this.extractNamesFromSheet(this.workbook, 'Boys');
     const girlsPlayers = this.extractNamesFromSheet(this.workbook, 'Girls');
-
-    this.shuffleArray(menPlayers);
+  
+    // Shuffle players
     this.shuffleArray(womenPlayers);
     this.shuffleArray(boysPlayers);
     this.shuffleArray(girlsPlayers);
-
-    this.generatedMenTeams = this.splitIntoTeams(menPlayers, this.teamMenSize);
+  
+    // Divide MEN players by prioritizing MVPMenList
+    const menPlayersWithoutMVP = menPlayers.filter(player => !MVPMenList.includes(player));
+    const prioritizedMenPlayers = menPlayers.filter(player => MVPMenList.includes(player));
+  
+    // Shuffle remaining MEN players
+    this.shuffleArray(menPlayersWithoutMVP);
+  
+    // Combine the MVP players with the shuffled remaining players
+    const finalMenPlayers = [...prioritizedMenPlayers, ...menPlayersWithoutMVP];
+  
+    // Generate teams
+    this.generatedMenTeams = this.splitIntoTeams(finalMenPlayers, this.teamMenSize);
     this.generatedWomenTeams = this.splitIntoTeams(womenPlayers, this.teamWomenSize);
     this.generatedBoysTeams = this.splitIntoTeams(boysPlayers, this.teamBoysSize);
     this.generatedGirlsTeams = this.splitIntoTeams(girlsPlayers, this.teamGirlsSize);
   }
+  
 
   extractNamesFromSheet(workbook: XLSX.WorkBook, sheetName: string): string[] {
     const sheet = workbook.Sheets[sheetName];
