@@ -53,9 +53,9 @@
     align-items: center;
     flex-wrap: wrap;
 }
-.matchTable{
+.matchTable, .timeTable{
     border-collapse: collapse;
-    width: 35%;
+    width: 45%;
     margin: 8px;
     text-align: center;
 }
@@ -70,5 +70,12 @@ th{
 @media (max-width:450px){
     #groupTable, #groupWiseTable{
         width: 100%;
+    }
+
+    .matchTable{
+        width: 45%;
+    }
+    .timeTable{
+        width: 90%;
     }
 }

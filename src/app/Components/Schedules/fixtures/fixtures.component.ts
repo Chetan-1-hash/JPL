@@ -14,29 +14,34 @@ import { Girlsfixtures, GirlsTeamNames } from './Girls';
 })
 export class FixturesComponent {
 
-  category:string="Men";
-  Groups:string[][]=MenGroups;
+  category: string = 'Men';
+  Groups: string[][] = MenGroups; // Ensure type matches
+  fixtures: { group: string; matches: { team1: string; team2: string; time: string }[] }[] = Menfixtures;
 
-  fixtures:{team1:string, team2:string, time:string}[] = Menfixtures;
-
-
-  CategoryChange(event:any){
-    this.category = event?.target.value;
-    if(this.category==="Men"){
-      this.Groups=MenGroups;
-      this.fixtures=Menfixtures;
-    }
-    else if(this.category==="Women"){
-      // this.Groups=WomenGroups;
-      this.fixtures=Womenfixtures;
-    }
-    else if(this.category==="Boys"){
-      // this.Groups=BoysGroups;
-      this.fixtures=Boysfixtures;
-    }
-    else if(this.category==="Girls"){
-      // this.Groups=GirlsGroups;
-      this.fixtures=Girlsfixtures;
+  CategoryChange(event: any): void {
+    const selectedCategory = event?.target?.value;
+    if (selectedCategory) {
+      this.category = selectedCategory;
+      switch (this.category) {
+        case 'Men':
+          this.Groups = MenGroups;
+          this.fixtures = Menfixtures;
+          break;
+        case 'Women':
+          this.Groups = []; // Women does not have groups
+          this.fixtures = Womenfixtures;
+          break;
+        case 'Boys':
+          this.Groups = []; // Boys does not have groups
+          this.fixtures = Boysfixtures;
+          break;
+        case 'Girls':
+          this.Groups = []; // Girls does not have groups
+          this.fixtures = Girlsfixtures;
+          break;
+        default:
+          console.warn('Unknown category selected');
+      }
     }
   }
 

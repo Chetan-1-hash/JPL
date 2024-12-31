@@ -23,15 +23,16 @@
     </div>
   
     <!-- Table for Group Wise Fixtures -->
-    <div id="groupWiseTable">
-      <table class="matchTable">
+    <div id="groupWiseTable" *ngFor="let fixture of fixtures">
+      <p class="tag"><strong>{{ fixture.group }}</strong></p>
+      <table class="timeTable">
         <tr>
             <th>Time</th>
             <th>Fixtures</th>
         </tr>
-        <tr *ngFor="let fixture of fixtures">
-            <td>{{ fixture.time }}</td>
-            <td>{{ fixture.team1 }} <b>Vs</b> {{ fixture.team2 }}</td>
+        <tr *ngFor="let match of fixture.matches">
+            <td>{{ match.time }}</td>
+            <td>{{ match.team1 }} <b>Vs</b> {{ match.team2 }}</td>
         </tr>
       </table>
     </div>
