@@ -144,6 +144,13 @@ td:hover {
     padding: 5px;
     font-size: 10px; /* Further reduce font size for smaller screens */
   }
+
+  .outputsection .Tables{
+    width: 100%;
+  }
+  .outputsection .Tables table{
+    width: 40%;
+  }
 }
 
 @media (min-height:809px){
