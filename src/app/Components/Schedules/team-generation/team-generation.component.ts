@@ -181,7 +181,7 @@ export class TeamGenerationComponent {
       scrollY: -window.scrollY,
     }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('portrait', 'px', [1600, 2200]); // Set layout size to match desktop
+      const pdf = new jsPDF('portrait', 'px', [1600, 4000]); // Set layout size to match desktop
   
       const imgWidth = 1536;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;

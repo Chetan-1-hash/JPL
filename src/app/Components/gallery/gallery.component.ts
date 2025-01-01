@@ -17,12 +17,6 @@ export class GalleryComponent {
     "IMG-20210127-WA0003.jpg",
     "IMG-20210127-WA0004.jpg",
     "IMG-20210127-WA0005.jpg",
-    "IMG-20210127-WA0005.jpg",
-    "IMG-20210127-WA0005.jpg",
-    "IMG-20210127-WA0005.jpg",
-    "IMG-20210127-WA0005.jpg",
-    "IMG-20210127-WA0005.jpg",
-    "IMG-20210127-WA0005.jpg",
   ];
 
   imageLists_2022: string[] = [];

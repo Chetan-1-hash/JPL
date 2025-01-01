@@ -46,7 +46,7 @@ input, button {
   padding: 10px;
   font-size: 16px;
   border-radius: 4px;
-  border: 2px solid salmon;
+  border: 2px solid rgb(208, 202, 247);
 }
 
 label, .tags {
@@ -56,7 +56,7 @@ label, .tags {
 
 .button {
   padding: 10px 20px;
-  background-color: salmon;
+  background-color: rgb(143, 129, 232);
   color: white;
   font-size: 16px;
   border: none;
@@ -66,7 +66,7 @@ label, .tags {
 }
 
 .button:hover {
-  background-color: rgb(240, 175, 168);
+  background-color: rgb(208, 202, 247);
 }
 .outputsection {
   width: 100%;
@@ -103,7 +103,7 @@ th, td {
 }
 
 th {
-  background-color: salmon;
+  background-color: rgb(208, 202, 247);
 }
 
 td {
@@ -129,9 +129,6 @@ td:hover {
 }
 
 @media (max-width: 450px) {
-  /* .container{
-    background-color: salmon;
-  } */
   .container .innercontainer .uploadsection{
     width: 90%;
   }

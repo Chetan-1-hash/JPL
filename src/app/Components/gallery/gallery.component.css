@@ -24,13 +24,13 @@
     outline: none;
     padding: 8px;
     border-radius: 8px;
-    background-color: salmon;
+    background-color: rgb(143, 129, 232);
     font-weight: bold;
     cursor: pointer;
 }
 
 .container .btns button:hover {
-    background-color: rgb(244, 175, 167);
+    background-color: rgb(208, 202, 247);
 }
 
 .imagecontainer {
@@ -79,7 +79,7 @@
     .container {
         padding: 12px 5px;
         height: auto;
-        background-color: salmon;
+        background-color: rgb(208, 202, 247);
     }
 
     .imagecontainer .images {
