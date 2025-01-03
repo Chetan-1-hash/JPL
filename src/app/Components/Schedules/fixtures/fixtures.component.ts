@@ -5,10 +5,11 @@ import { Menfixtures, MenGroups, MensTeamNames } from './Men';
 import { Womenfixtures, WomensTeamNames } from './Women';
 import { Boysfixtures, BoysTeamNames } from './Boys';
 import { Girlsfixtures, GirlsTeamNames } from './Girls';
+import { SpinnerComponent } from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-fixtures',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SpinnerComponent],
   templateUrl: './fixtures.component.html',
   styleUrl: './fixtures.component.css'
 })

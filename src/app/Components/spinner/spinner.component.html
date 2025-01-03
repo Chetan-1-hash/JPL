@@ -1,0 +1,7 @@
+<div class="progress-overlay" *ngIf="isLoading">
+    <video #progressVideo class="progress-video" autoplay loop muted>
+        <source [src]="selectedVideo + '.mp4'" type="video/mp4">
+        <source [src]="selectedVideo + '.webm'" type="video/webm">
+        <source [src]="selectedVideo + '.ogv'" type="video/ogv">
+    </video>
+</div>

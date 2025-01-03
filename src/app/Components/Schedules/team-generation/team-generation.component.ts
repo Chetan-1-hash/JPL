@@ -5,10 +5,11 @@ import * as XLSX from 'xlsx';  // Import the xlsx library
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MVPMenList } from './MVPList'
+import { SpinnerComponent } from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-team-generation',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SpinnerComponent],
   templateUrl: './team-generation.component.html',
   styleUrls: ['./team-generation.component.css']
 })

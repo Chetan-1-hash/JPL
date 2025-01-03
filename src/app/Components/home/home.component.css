@@ -8,7 +8,6 @@
 }
 
 .container .innercontainer {
-    background: linear-gradient(to bottom, rgb(208, 202, 247), slateblue);
     padding: 0px 10px 20px 10px;
     width: auto;
     height: 100%;
@@ -22,10 +21,14 @@
 }
 
 .container .innercontainer .title {
-    font-size: 82px;
-    font-family: "Rubik Vinyl", serif;
+    font-size: 85px;
+    font-family: "Limelight", serif;
     font-weight: 700;
     text-align: center;
+    background: linear-gradient(to right, #c084fc, #db2777);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent
 }
 
 .container .innercontainer .line-1 {

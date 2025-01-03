@@ -1,3 +1,4 @@
+
 .navbar {
     display: flex;
     padding: 6px 8px;
@@ -28,13 +29,10 @@
 
 .navbar a {
     text-decoration: none;
-    color: black;
-    margin: 2px 5px;
-    padding: 3px;
     position: relative;
     display: inline-block;
-    transition: all 0.3s ease;
-    /* Smooth transition for all properties */
+    color: inherit;
+    padding: 6px;
 }
 
 .navbar a::after {
@@ -43,23 +41,16 @@
     bottom: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background-color: seagreen;
-    transition: width 0.3s ease;
-    /* Smooth animation for the bottom border */
+    height: 3px;
+    background: linear-gradient(to right, #c084fc, #db2777);
+    transition: width 0.4s ease-in-out;
 }
 
 .navbar a:hover::after {
     width: 100%;
-    /* Expand the bottom border from left to right */
 }
 
-.navbar a:hover {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    transition: background-color 0.3s ease;
-    /* Smooth background color transition */
-}
+
 
 
 select {
@@ -92,7 +83,6 @@ option {
     .navbar {
         font-size: 14px;
         padding: 7px 8px;
-        background-color: rgb(208, 202, 247);
     }
 
     #naviconul {
@@ -132,13 +122,8 @@ option {
         font-weight: 700;
     }
 
-    .navbar a::after,
-    .navbar a:hover {
-        background-color: transparent;
-        border-bottom: 2px solid seagreen;
-    }
 
-    option {
+    /* option {
         background-color: rgb(143, 129, 232);
-    }
+    } */
 }

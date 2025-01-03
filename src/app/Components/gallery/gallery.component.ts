@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-gallery',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SpinnerComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
 })

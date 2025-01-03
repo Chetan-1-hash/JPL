@@ -1,0 +1,25 @@
+.progress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for the video element */
+.progress-video {
+    width: 10%;
+    height: auto;
+    border-radius: 10px;
+}
+
+@media (max-width:450px){
+    .progress-video{
+        width: 40%;
+    }
+}

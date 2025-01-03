@@ -4,7 +4,6 @@
     padding: 3px;
     display: flex;
     flex-direction: column;
-    /* border: 2px solid rebeccapurple; */
 }
 
 .container .btns {
@@ -24,13 +23,13 @@
     outline: none;
     padding: 8px;
     border-radius: 8px;
-    background-color: rgb(143, 129, 232);
+    background: linear-gradient(to right, #c084fc, #db2777);
     font-weight: bold;
     cursor: pointer;
 }
 
 .container .btns button:hover {
-    background-color: rgb(208, 202, 247);
+    background: linear-gradient(to right, #dbbef8, #fb61a6);
 }
 
 .imagecontainer {
@@ -79,7 +78,6 @@
     .container {
         padding: 12px 5px;
         height: auto;
-        background-color: rgb(208, 202, 247);
     }
 
     .imagecontainer .images {
