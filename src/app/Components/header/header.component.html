@@ -5,7 +5,7 @@
     <div class="inner" #navrouter [ngClass]="{'open': isOpened}">
         <nav id="left">
             <a routerLink="/home">Home</a>
-            <select name="schedule" id="schedule" (change)="onSelection($event)" [ngStyle]="{ 'width': selectedOption === 'team' ? '170px' : '100px' }">
+            <select name="schedule" id="schedule" (change)="onSelection($event)" [ngStyle]="{ 'width': selectedOption === 'team' ? '200px' : '120px' }">
                 <option value="">Schedule</option>
                 <option value="team">Teams Generation</option>
                 <option value="fixtures">Fixtures</option>

@@ -8,7 +8,7 @@
 
 .container .btns {
     display: flex;
-    gap: 22px;
+    gap: 24px;
     font-family: "Fjalla One", sans-serif;
 }
 
@@ -16,6 +16,7 @@
     border: none;
     outline: none;
     padding: 8px;
+    font-size: 24px;
 }
 
 .container .btns button {
@@ -26,6 +27,8 @@
     background: linear-gradient(to right, #c084fc, #db2777);
     font-weight: bold;
     cursor: pointer;
+    font-size: 20px;
+
 }
 
 .container .btns button:hover {
@@ -84,6 +87,10 @@
         height: auto;
     }
 
+    .container .btns{
+        gap: 18px;
+    }
+
     .container .btns button,
     .container .btns .tag {
         font-size: 16px;
@@ -132,7 +139,6 @@
         padding: 15px;
         height: auto;
         width: 110vw;
-        border: 2px solid;
     }
 
     .imagecontainer .images {
