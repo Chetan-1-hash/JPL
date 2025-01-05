@@ -4,14 +4,13 @@ import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';  // Import the xlsx library
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { MVPMenList } from './MVPList'
+import { MVPMenList } from './SpecialList'
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-team-generation',
-  imports: [FormsModule, CommonModule, SpinnerComponent
-  ],
+  imports: [FormsModule, CommonModule, SpinnerComponent],
   templateUrl: './team-generation.component.html',
   styleUrls: ['./team-generation.component.css']
 })
@@ -25,17 +24,17 @@ export class TeamGenerationComponent {
   isBoysSelected: boolean = false;
   isGirlsSelected: boolean = false;
 
-  MensTeamNames: string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Thor', 'Loki', 'Black Panther', 'Hawkeye', 'Vision'];
+  MensTeamNames: string[] = ['Doremon', 'Shinchan', 'Tom', 'Jerry', 'Oggy', 'Ninja Hatori', 'Nobita', 'Pokemon', 'Motu Patlu', 'Pikachu', 'SpongeBob SquarePants'];
   WomensTeamNames: string[] = ['Wonder Woman', 'Captian Marvel', 'Mantis', 'Moondragon'];
-  BoysTeamNames: string[] = ['Doremon', 'Shinchan', 'Tom', 'Jerry', 'Oggy', 'Ninja Hatori', 'SpongeBob SquarePants', 'Pokemon', 'Motu Patlu'];
+  BoysTeamNames: string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Thor', 'Loki', 'Black Panther', 'Hawkeye', 'Vision'];
   GirlsTeamNames: string[] = ['Cinderella', 'Snow White', 'Tom', 'Jerry', 'Moana', 'Minnie Mouse'];
 
-  teamMenSize: number = 7;
+  teamMenSize: number = 8;
   teamWomenSize: number = 7;
   teamBoysSize: number = 7;
   teamGirlsSize: number = 7;
 
-  teamSize: number = 7;
+  teamSize: number = 8;
 
   generatedMenTeams: string[][] = [];
   generatedWomenTeams: string[][] = [];
@@ -58,12 +57,60 @@ export class TeamGenerationComponent {
     reader.readAsBinaryString(file);
   }
 
+  extractNamesAndAgesFromSheet(workbook: XLSX.WorkBook, sheetName: string): { name: string; age: number }[] {
+    const sheet = workbook.Sheets[sheetName];
+    if (!sheet) {
+      console.error(`Sheet ${sheetName} not found!`);
+      this.toastr.error(`Sheet ${sheetName} not found!`);
+      return [];
+    }
+
+    const data: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+    const fullNames: { name: string; age: number }[] = [];
+    const fullNameIndex = data[0].indexOf('FullName');
+    const ageIndex = data[0].indexOf('Age');  // Assuming 'Age' column exists
+
+    for (let i = 1; i < data.length; i++) {
+      if (data[i][fullNameIndex] && data[i][ageIndex]) {
+        const rawName = data[i][fullNameIndex];
+        const age = data[i][ageIndex];
+        const nameParts = rawName.split(' ').filter(Boolean); // Split and remove extra spaces
+        const cleanedName = nameParts.length > 1
+          ? `${nameParts[0]} ${nameParts[nameParts.length - 1]}` // Keep first and last names
+          : rawName; // If only one part, keep it as is
+
+        fullNames.push({ name: cleanedName, age: age });
+      }
+    }
+
+    return fullNames;
+  }
+
+
+  // Shuffle an array of players, each having a name and age property
   shuffleArray(arr: string[]): void {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
+
+  // Split players into teams based on the team size
+  splitIntoTeams(players:string[], teamSize: number): string[][] {
+    const teams: string[][] = [];
+
+    // Ensure the teams are as evenly distributed as possible
+    for (let i = 0; i < players.length; i += teamSize) {
+      const team: string[] = [];
+      for (let j = i; j < i + teamSize && j < players.length; j++) {
+        team.push(players[j]); // Push the player's name to the team
+      }
+      teams.push(team);
+    }
+
+    return teams;
+  }
+
 
   generateTeams(): void {
     if (!this.workbook) {
@@ -73,37 +120,51 @@ export class TeamGenerationComponent {
     }
 
     // Extract player names from the respective sheets
-    const menPlayers = this.extractNamesFromSheet(this.workbook, 'MEN');
-    const womenPlayers = this.extractNamesFromSheet(this.workbook, 'WOMEN');
-    const boysPlayers = this.extractNamesFromSheet(this.workbook, 'Boys');
-    const girlsPlayers = this.extractNamesFromSheet(this.workbook, 'Girls');
+    const menPlayers = this.extractNamesAndAgesFromSheet(this.workbook, 'MEN');
+    const womenPlayers = this.extractNamesAndAgesFromSheet(this.workbook, 'WOMEN');
+    const boysPlayers = this.extractNamesAndAgesFromSheet(this.workbook, 'Boys');
+    const girlsPlayers = this.extractNamesAndAgesFromSheet(this.workbook, 'Girls');
 
     // Shuffle players for non-MEN categories
-    this.shuffleArray(womenPlayers);
-    this.shuffleArray(boysPlayers);
-    this.shuffleArray(girlsPlayers);
+    this.shuffleArray(womenPlayers.map(players => players.name));
+    this.shuffleArray(boysPlayers.map(players => players.name));
+    this.shuffleArray(girlsPlayers.map(players => players.name));
 
+    // Divide into age groups
+    const age13To16Players = menPlayers.filter(player => player.age >= 13 && player.age <= 16).map(players => players.name);
+    const age17AndAbovePlayers = menPlayers.filter(player => player.age >= 17).map(player => player.name);
+
+
+    // Extract MVP List for both age groups
+    const mvp13_16 = age13To16Players.filter(player => MVPMenList.includes(player));
+    const mvp17_above = age17AndAbovePlayers.filter(player => MVPMenList.includes(player));
+    
     // Divide MEN players by prioritizing MVPMenList
-    const prioritizedMenPlayers = menPlayers.filter(player => MVPMenList.includes(player));
-    const menPlayersWithoutMVP = menPlayers.filter(player => !MVPMenList.includes(player));
+    const nonmvpPlayers13_16 = age13To16Players.filter(player => !MVPMenList.includes(player));
+    const nonmvpPlayers17_Above = age17AndAbovePlayers.filter(player => !MVPMenList.includes(player));
 
+    const mvpPlayers = [...mvp13_16, ...mvp17_above];
 
     // Shuffle remaining MEN players
-    this.shuffleArray(menPlayersWithoutMVP);
+    this.shuffleArray(nonmvpPlayers17_Above);
 
-    // Divide MVP players equally across teams
+    
+    // Divide MVP players according to age equally across teams
     const totalTeams = Math.ceil(menPlayers.length / this.teamMenSize);
     const mvpTeams = this.initializeEmptyTeams(totalTeams);
-    this.distributeMVPPlayers(mvpTeams, prioritizedMenPlayers);
+    // this.distributeMVPPlayers(mvpTeams, specialList);
+    this.distributeMVPPlayers(mvpTeams, mvpPlayers);
+    this.distributeMVPPlayers(mvpTeams, nonmvpPlayers13_16);
+
 
     // Fill the remaining slots in each team with non-MVP players
-    const finalMenTeams = this.fillTeams(mvpTeams, menPlayersWithoutMVP, this.teamMenSize);
+    const finalMenTeams = this.fillTeams(mvpTeams, nonmvpPlayers17_Above, this.teamMenSize);
 
     // Generate teams for other categories
     this.generatedMenTeams = finalMenTeams;
-    this.generatedWomenTeams = this.splitIntoTeams(womenPlayers, this.teamWomenSize);
-    this.generatedBoysTeams = this.splitIntoTeams(boysPlayers, this.teamBoysSize);
-    this.generatedGirlsTeams = this.splitIntoTeams(girlsPlayers, this.teamGirlsSize);
+    this.generatedWomenTeams = this.splitIntoTeams(womenPlayers.map(players => players.name), this.teamWomenSize);
+    this.generatedBoysTeams = this.splitIntoTeams(boysPlayers.map(players => players.name), this.teamBoysSize);
+    this.generatedGirlsTeams = this.splitIntoTeams(girlsPlayers.map(players => players.name), this.teamGirlsSize);
   }
 
   initializeEmptyTeams(totalTeams: number): string[][] {
@@ -114,9 +175,9 @@ export class TeamGenerationComponent {
     return teams;
   }
 
-  distributeMVPPlayers(teams: string[][], mvpPlayers: string[]): void {
+  distributeMVPPlayers(teams: string[][], specialPlayers: string[]): void {
     let teamIndex = 0;
-    mvpPlayers.forEach(player => {
+    specialPlayers.forEach(player => {
       teams[teamIndex].push(player);
       teamIndex = (teamIndex + 1) % teams.length; // Move to the next team cyclically
     });
@@ -135,40 +196,7 @@ export class TeamGenerationComponent {
   }
 
 
-  extractNamesFromSheet(workbook: XLSX.WorkBook, sheetName: string): string[] {
-    const sheet = workbook.Sheets[sheetName];
-    if (!sheet) {
-      console.error(`Sheet ${sheetName} not found!`);
-      this.toastr.error(`Sheet ${sheetName} not found!`);
-      return [];
-    }
 
-    const data: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-    const fullNames: string[] = [];
-    const fullNameIndex = data[0].indexOf('FullName');
-
-    for (let i = 1; i < data.length; i++) {
-      if (data[i][fullNameIndex]) {
-        const rawName = data[i][fullNameIndex];
-        const nameParts = rawName.split(' ').filter(Boolean); // Split and remove extra spaces
-        const cleanedName = nameParts.length > 1
-          ? `${nameParts[0]} ${nameParts[nameParts.length - 1]}` // Keep first and last names
-          : rawName; // If only one part, keep it as is
-        fullNames.push(cleanedName);
-      }
-    }
-
-    return fullNames;
-  }
-
-
-  splitIntoTeams(players: string[], teamSize: number): string[][] {
-    const teams: string[][] = [];
-    for (let i = 0; i < players.length; i += teamSize) {
-      teams.push(players.slice(i, i + teamSize));
-    }
-    return teams;
-  }
 
   exportPdf(): void {
     const container = document.querySelector('.outputsection') as HTMLElement | null;
