@@ -1,10 +1,9 @@
 export const MenGroups:string[][] = [
-    ['Captian America', 'Iron Man', 'The Hulk'],
-    ['Spider Man', 'Batman', 'Superman'],
-    ['Thor', 'Loki', 'Black Panther'],
+    ['Doremon', 'Nobita', 'Tom', 'Jerry'],
+    ['Pikachu', 'Raichu', 'Motu', 'Patlu'],
 ];
 
-export const MensTeamNames:string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Superman', 'Thor', 'Loki', 'Black Panther', 'Hawkeye', 'Vision'];
+export const MensTeamNames:string[] = ['Doremon', 'Nobita', 'Tom', 'Jerry', 'Pikachu', 'Raichu', 'Motu', 'Patlu'];
 
 export const Menfixtures: { group: string, matches: { team1: string, team2: string, time: string }[] }[] = [
     {
