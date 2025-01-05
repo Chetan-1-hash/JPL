@@ -24,17 +24,17 @@ export class TeamGenerationComponent {
   isBoysSelected: boolean = false;
   isGirlsSelected: boolean = false;
 
-  MensTeamNames: string[] = ['Doremon', 'Shinchan', 'Tom', 'Jerry', 'Oggy', 'Ninja Hatori', 'Nobita', 'Pokemon', 'Motu Patlu', 'Pikachu', 'SpongeBob SquarePants'];
+  MensTeamNames: string[] = ['Doremon', 'Nobita', 'Tom', 'Jerry','Raichu', 'Pikachu', 'Motu', 'Patlu', 'Shinchan', 'SpongeBob SquarePants'];
   WomensTeamNames: string[] = ['Wonder Woman', 'Captian Marvel', 'Mantis', 'Moondragon'];
   BoysTeamNames: string[] = ['Captian America', 'Iron Man', 'The Hulk', 'Spider Man', 'Batman', 'Thor', 'Loki', 'Black Panther', 'Hawkeye', 'Vision'];
   GirlsTeamNames: string[] = ['Cinderella', 'Snow White', 'Tom', 'Jerry', 'Moana', 'Minnie Mouse'];
 
-  teamMenSize: number = 8;
+  teamMenSize: number = 7;
   teamWomenSize: number = 7;
   teamBoysSize: number = 7;
   teamGirlsSize: number = 7;
 
-  teamSize: number = 8;
+  teamSize: number = 7;
 
   generatedMenTeams: string[][] = [];
   generatedWomenTeams: string[][] = [];
@@ -136,32 +136,21 @@ export class TeamGenerationComponent {
 
 
     // Extract MVP List for both age groups
-    const mvp13_16 = age13To16Players.filter(player => MVPMenList.includes(player));
     const mvp17_above = age17AndAbovePlayers.filter(player => MVPMenList.includes(player));
-    
-    // Divide MEN players by prioritizing MVPMenList
-    const nonmvpPlayers13_16 = age13To16Players.filter(player => !MVPMenList.includes(player));
     const nonmvpPlayers17_Above = age17AndAbovePlayers.filter(player => !MVPMenList.includes(player));
-
-    const mvpPlayers = [...mvp13_16, ...mvp17_above];
-
-    // Shuffle remaining MEN players
+    
+    this.shuffleArray(mvp17_above);
     this.shuffleArray(nonmvpPlayers17_Above);
 
     
     // Divide MVP players according to age equally across teams
-    const totalTeams = Math.ceil(menPlayers.length / this.teamMenSize);
+    const totalTeams = Math.ceil(age17AndAbovePlayers.length / this.teamMenSize);
     const mvpTeams = this.initializeEmptyTeams(totalTeams);
-    // this.distributeMVPPlayers(mvpTeams, specialList);
-    this.distributeMVPPlayers(mvpTeams, mvpPlayers);
-    this.distributeMVPPlayers(mvpTeams, nonmvpPlayers13_16);
+    this.distributeMVPPlayers(mvpTeams, mvp17_above);
 
-
-    // Fill the remaining slots in each team with non-MVP players
-    const finalMenTeams = this.fillTeams(mvpTeams, nonmvpPlayers17_Above, this.teamMenSize);
 
     // Generate teams for other categories
-    this.generatedMenTeams = finalMenTeams;
+    this.generatedMenTeams = this.fillTeams(mvpTeams, nonmvpPlayers17_Above, this.teamMenSize);
     this.generatedWomenTeams = this.splitIntoTeams(womenPlayers.map(players => players.name), this.teamWomenSize);
     this.generatedBoysTeams = this.splitIntoTeams(boysPlayers.map(players => players.name), this.teamBoysSize);
     this.generatedGirlsTeams = this.splitIntoTeams(girlsPlayers.map(players => players.name), this.teamGirlsSize);

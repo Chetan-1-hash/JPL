@@ -56,7 +56,12 @@
           <tr>
             <th>{{ MensTeamNames[teamIndex] }}</th>
           </tr>
-          <tr *ngFor="let player of team">
+          <tr>
+            <td>
+              <label class="captainsTag">CAPTAIN: </label> {{ team[0] }}
+            </td>
+          </tr>
+          <tr *ngFor="let player of team.slice(1)">
             <td>{{ player }}</td>
           </tr>
         </table>
