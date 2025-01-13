@@ -14,7 +14,7 @@ export class GalleryComponent {
 
   constructor(private toastr:ToastrService){}
 
-  year: number = 2021;
+  year: number = 2025;
 
   imageLists_2021: string[] = [
     "IMG_20211115_083912.jpg",
@@ -27,7 +27,16 @@ export class GalleryComponent {
   imageLists_2023: string[] = [];
   imageLists_2024: string[] = [];
 
-  imgLists: string[] = this.imageLists_2021;
+  imageLists_2025: string[] = [
+    "trophies.jpg",
+    "p1.jpg",
+    "p2.jpg",
+    "2025_1.jpg", "2025_2.jpg", "2025_3.jpg", "2025_4.jpg", "2025_5.jpg", "2025_6.jpg", "2025_7.jpg","2025_8.jpg",
+    "2025_9.jpg", "2025_10.jpg", "2025_11.jpg", "2025_12.jpg", "2025_13.jpg", "2025_14.jpg", "2025_15.jpg", "2025_16.jpg",
+    "2025_17.jpg", "2025_18.jpg", "2025_19.jpg", "2025_20.jpg", "2025_21.jpg", "2025_22.jpg",
+  ];
+
+  imgLists: string[] = this.imageLists_2025;
 
 
   YearChange(event: any) {
@@ -43,6 +52,8 @@ export class GalleryComponent {
         this.imgLists = this.imageLists_2023;
       } else if (this.year === 2024) {
         this.imgLists = this.imageLists_2024;
+      }else if (this.year === 2025) {
+        this.imgLists = this.imageLists_2025;
       }
 
       // Check if there are no images for the selected year
@@ -50,6 +61,20 @@ export class GalleryComponent {
         this.toastr.error("Images not found!");
       }
     }, 200);
+  }
+
+  scrollLeft() {
+    const btnsWrapper = document.querySelector('.btns-wrapper') as HTMLElement;
+    if (btnsWrapper) {
+      btnsWrapper.scrollBy({ left: -200, behavior: 'smooth' }); // Scroll 200px left
+    }
+  }
+
+  scrollRight() {
+    const btnsWrapper = document.querySelector('.btns-wrapper') as HTMLElement;
+    if (btnsWrapper) {
+      btnsWrapper.scrollBy({ left: 200, behavior: 'smooth' }); // Scroll 200px right
+    }
   }
 
 }

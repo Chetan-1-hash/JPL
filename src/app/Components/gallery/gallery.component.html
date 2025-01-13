@@ -1,16 +1,26 @@
 <div class="container">
     <app-spinner></app-spinner>
-    <div class="btns">
+    <div class="btns-wrapper-container">
         <p class="tag">YEAR</p>
-        <button value="2021" (click)="YearChange($event)">2021</button>
-        <button value="2022" (click)="YearChange($event)">2022</button>
-        <button value="2023" (click)="YearChange($event)">2023</button>
-        <button value="2024" (click)="YearChange($event)">2024</button>
+        <button class="scroll-btn left" (click)="scrollLeft()">&#9664;</button>
+        
+        <div class="btns-wrapper">
+            <div class="btns">
+                <button value="2021" (click)="YearChange($event)">2021</button>
+                <button value="2022" (click)="YearChange($event)">2022</button>
+                <button value="2023" (click)="YearChange($event)">2023</button>
+                <button value="2024" (click)="YearChange($event)">2024</button>
+                <button value="2025" (click)="YearChange($event)">2025</button>
+            </div>
+        </div>
+        
+        <!-- Right Scroll Button -->
+        <button class="scroll-btn right" (click)="scrollRight()">&#9654;</button>
     </div>
     <div class="imagecontainer">
         <p>{{year}}</p>
         <div class="images">
-            <img class="each-img" *ngFor="let i of imgLists; let ind=index" [src]="i" [alt]="'img-'+ind"/>
+            <img class="each-img" *ngFor="let i of imgLists; let ind=index" [src]="i" [alt]="'img-'+ind" />
         </div>
     </div>
-</div>  
+</div>

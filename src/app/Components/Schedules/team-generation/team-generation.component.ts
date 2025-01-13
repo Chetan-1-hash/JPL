@@ -134,6 +134,8 @@ export class TeamGenerationComponent {
     const age13To16Players = menPlayers.filter(player => player.age >= 13 && player.age <= 16).map(players => players.name);
     const age17AndAbovePlayers = menPlayers.filter(player => player.age >= 17).map(player => player.name);
 
+    console.log(age13To16Players);
+
 
     // Extract MVP List for both age groups
     const mvp17_above = age17AndAbovePlayers.filter(player => MVPMenList.includes(player));
